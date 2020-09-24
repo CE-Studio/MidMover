@@ -33,6 +33,27 @@ public class cameraMovement : MonoBehaviour
                 }                
             }
             transform.position += transform.forward * (Input.mouseScrollDelta.y * 0.1f);
+            if (Input.GetKey("w")) {
+                transform.position += transform.forward * (Time.deltaTime * 4f);
+            }
+            if (Input.GetKey("a")) {
+                transform.position += transform.right * (Time.deltaTime * -4f);
+            }
+            if (Input.GetKey("s")) {
+                transform.position += transform.forward * (Time.deltaTime * -4f);
+            }
+            if (Input.GetKey("d")) {
+                transform.position += transform.right * (Time.deltaTime * 4f);
+            }
+            if (Input.GetKey("q")) {
+                transform.Rotate(0, 0, Time.deltaTime * 16f);
+            }
+            if (Input.GetKey("e")) {
+                transform.Rotate(0, 0, Time.deltaTime * -16f);
+            }
+            if (Input.GetKey("r")) {
+                transform.rotation = new Quaternion(0, 0, 0, 0);
+            }
         }
     }
 }
