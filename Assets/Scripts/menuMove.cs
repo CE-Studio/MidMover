@@ -43,11 +43,11 @@ public class menuMove : MonoBehaviour
         xcurpos = Input.mousePosition.x;
         ycurpos = Input.mousePosition.y;
 
-        transform.rotation = Quaternion.Euler(0, 0, xvel / -2);
-        backing.transform.rotation = Quaternion.Euler(0, 0, xvel);
-        backing.transform.localScale = new Vector3(0.5f, (-yvel * 0.1f) + 1, 0);
+        transform.rotation = Quaternion.Euler(0, 0, (xvel * 0.2f) / -2f);
+        backing.transform.rotation = Quaternion.Euler(0, 0, (xvel * 0.2f));
+        backing.transform.localScale = new Vector3(0.5f, (-yvel * 0.01f) + 1, 0);
 
-        transform.position += new Vector3(Time.deltaTime * (targx - transform.position.x) * 8, Time.deltaTime * (targy - transform.position.y) * 8, 0);
+        transform.position += new Vector3((targx - transform.position.x) * 0.1f, (targy - transform.position.y) * 0.1f, 0);
 
         if (backing.GetComponent<betterButton>().PubIsPressed()) {
             targx -= xcurvel;
