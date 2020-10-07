@@ -1,10 +1,13 @@
-﻿using System.Collections;
+﻿#region Imports
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+#endregion
 
 public class menuMove : MonoBehaviour
 {
+    #region Variable declarations
     private GameObject backing;
     private float xpos;
     private float ypos;
@@ -16,8 +19,9 @@ public class menuMove : MonoBehaviour
     private float ycurvel;
     private float targx;
     private float targy;
-    public GameObject canvas;
-    private RectTransform canvbs;
+    private GameObject canvas;
+    #endregion
+
     // Start is called before the first frame update
     void Start() {
         backing = this.gameObject.transform.GetChild(0).gameObject;
@@ -28,11 +32,22 @@ public class menuMove : MonoBehaviour
 
         xcurpos = Input.mousePosition.x;
         ycurpos = Input.mousePosition.y;
-        canvbs = canvas.GetComponent<RectTransform>();
+        canvas = GameObject.Find("Canvas");
     }
 
     // Update is called once per frame
     void Update() {
+        Movement();
+        ActionAnimate();
+    }
+
+    // Smoothly animate opening, closing, and size changes
+    void ActionAnimate() {
+
+    }
+
+    // Move menus with warp animation
+    void Movement() {
         xvel = xpos - transform.position.x;
         yvel = ypos - transform.position.y;
         xpos = transform.position.x;
@@ -52,15 +67,15 @@ public class menuMove : MonoBehaviour
         if (backing.GetComponent<betterButton>().PubIsPressed()) {
             targx -= xcurvel;
             targy -= ycurvel;
-            if (targx > canvbs.rect.width * 2) {
-                targx = canvbs.rect.width * 2;
+            if (targx > Camera.main.pixelRect.width) {
+                targx = Camera.main.pixelRect.width;
             } else if (targx < 0) {
                 targx = 0;
             }
-            if (targy > canvbs.rect.height * 2) {
-                targy = canvbs.rect.height * 2;
-            } else if (targy < 0) {
-                targy = 0;
+            if (targy > Camera.main.pixelRect.height) {
+                targy = Camera.main.pixelRect.height;
+            } else if (targy < 27) {
+                targy = 27;
             }
         }
     }
