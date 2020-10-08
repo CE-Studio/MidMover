@@ -36,7 +36,6 @@ public class menuController : MonoBehaviour
     // Start is called before the first frame update
     void Start() {
         #region Set variables
-        print("test");
         backing = this.gameObject.transform.GetChild(0).gameObject;
         xpos = transform.position.x;
         ypos = transform.position.y;
@@ -52,6 +51,8 @@ public class menuController : MonoBehaviour
                                backing.GetComponent<RectTransform>().rect.height);
         targSize = fullSize;
         #endregion
+
+        transform.SetParent(canvas.transform);
     }
 
     // Update is called once per frame
@@ -100,9 +101,7 @@ public class menuController : MonoBehaviour
                         backing.transform.GetChild(2).gameObject.SetActive(true);
                         break;
                     case "close":
-                        foreach (Transform child in backing.transform) {
-                            child.gameObject.SetActive(true);
-                        }
+                        Destroy(gameObject);
                         break;
                     }
             } else {
@@ -183,6 +182,16 @@ public class menuController : MonoBehaviour
                 targy = Camera.main.pixelRect.height;
             } else if (targy < 34) {
                 targy = 34;
+            }
+        }
+    }
+
+    // Set up interactions
+    public void Initalize(object[] elements) {
+        foreach (object[] i in elements) {
+            switch (i[0]) {
+                case "test":
+                    break;
             }
         }
     }
