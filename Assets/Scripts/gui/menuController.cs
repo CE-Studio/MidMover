@@ -53,6 +53,7 @@ public class menuController : MonoBehaviour
         #endregion
 
         transform.SetParent(canvas.transform);
+        backing.transform.GetChild(0).gameObject.GetComponent<Text>().text = title;
     }
 
     // Update is called once per frame
@@ -94,8 +95,12 @@ public class menuController : MonoBehaviour
                         foreach (Transform child in backing.transform) {
                             child.gameObject.SetActive(true);
                         }
+                        backing.transform.GetChild(0).gameObject.GetComponent<Text>().text = title;
                         break;
                     case "tab":
+                        if (title.Length >= 9) {
+                            backing.transform.GetChild(0).gameObject.GetComponent<Text>().text = title.Substring(0, 7) + "...";
+                        }
                         backing.transform.GetChild(0).gameObject.SetActive(true);
                         backing.transform.GetChild(1).gameObject.SetActive(true);
                         backing.transform.GetChild(2).gameObject.SetActive(true);
