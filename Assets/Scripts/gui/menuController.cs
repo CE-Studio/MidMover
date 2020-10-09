@@ -98,8 +98,8 @@ public class menuController : MonoBehaviour
                         backing.transform.GetChild(0).gameObject.GetComponent<Text>().text = title;
                         break;
                     case "tab":
-                        if (title.Length >= 9) {
-                            backing.transform.GetChild(0).gameObject.GetComponent<Text>().text = title.Substring(0, 7) + "...";
+                        if (title.Length >= 8) {
+                            backing.transform.GetChild(0).gameObject.GetComponent<Text>().text = title.Substring(0, 6) + "...";
                         }
                         backing.transform.GetChild(0).gameObject.SetActive(true);
                         backing.transform.GetChild(1).gameObject.SetActive(true);
