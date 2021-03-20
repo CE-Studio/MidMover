@@ -53,7 +53,19 @@ public class menuController : MonoBehaviour
         #endregion
 
         transform.SetParent(canvas.transform);
+        transform.localScale = new Vector3(2, 1, 1);
         backing.transform.GetChild(0).gameObject.GetComponent<Text>().text = title;
+
+        if (targx > Camera.main.pixelRect.width) {
+            targx = Camera.main.pixelRect.width;
+        } else if (targx < 0) {
+            targx = 0;
+        }
+        if (targy > Camera.main.pixelRect.height) {
+            targy = Camera.main.pixelRect.height;
+        } else if (targy < 34) {
+            targy = 34;
+        }
     }
 
     // Update is called once per frame

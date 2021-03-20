@@ -13,6 +13,7 @@ public class cameraMovement : MonoBehaviour
     void Start(){
         lastmousex = Input.mousePosition.x;
         lastmousey = Input.mousePosition.y;
+        GameObject menu = Instantiate(Resources.Load("Prefabs/menubox"), transform.position, Quaternion.identity) as GameObject;
     }
 
     // Update is called once per frame
