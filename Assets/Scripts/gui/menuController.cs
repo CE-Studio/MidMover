@@ -31,6 +31,8 @@ public class menuController : MonoBehaviour
 
     #region Configuration variable declarations
     public string title = "Menu window";
+    public string mode = "config";
+    public GameObject linkedobj;
     #endregion
 
     // Start is called before the first frame update
