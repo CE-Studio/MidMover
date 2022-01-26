@@ -1446,5 +1446,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: transformPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 6486509780974959931, guid: 0e995313b57023e4baa7ed1fc32f2e19,
+        type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 677487117}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e995313b57023e4baa7ed1fc32f2e19, type: 3}

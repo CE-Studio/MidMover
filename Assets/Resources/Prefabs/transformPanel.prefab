@@ -2735,6 +2735,7 @@ GameObject:
   - component: {fileID: 944712970423141260}
   - component: {fileID: 944712970423141266}
   - component: {fileID: 944712970423141261}
+  - component: {fileID: 6486509780974959931}
   m_Layer: 5
   m_Name: transformPanel
   m_TagString: Untagged
@@ -2811,6 +2812,27 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 3
+--- !u!114 &6486509780974959931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 944712970423141263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dc74b30cc8b26649a5f56f2be0743bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  xpos: {fileID: 944712970426588688}
+  ypos: {fileID: 944712970008320077}
+  zpos: {fileID: 944712969376245192}
+  xsca: {fileID: 944712969016166070}
+  ysca: {fileID: 944712969511575447}
+  zsca: {fileID: 944712970303328808}
+  xrot: {fileID: 944712968908734030}
+  yrot: {fileID: 944712969399049919}
+  zrot: {fileID: 944712969925866180}
 --- !u!1 &944712970426588690
 GameObject:
   m_ObjectHideFlags: 0
