@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 
 public class objectMidiController:MonoBehaviour {
-    public static readonly System.Type[] typelist = new System.Type[] {typeof(bool), typeof(int), typeof(uint), typeof(float), typeof(Vector2), typeof(Vector2Int), typeof(Vector3), typeof(Vector3Int), typeof(Vector4), typeof(string)};
+    public static readonly System.Type[] typelist = new System.Type[] { typeof(bool), typeof(int), typeof(uint), typeof(float), typeof(Vector2), typeof(Vector2Int), typeof(Vector3), typeof(Vector3Int), typeof(Vector4), typeof(string) };
 
     private GameObject parent;
     private Component[] parentComponents;
@@ -35,7 +35,7 @@ public class objectMidiController:MonoBehaviour {
         parentComponents = parent.GetComponents(typeof(Component));
 
         scrapeFields();
-        
+
     }
 
     // Update is called once per frame

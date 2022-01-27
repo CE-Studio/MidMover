@@ -5,8 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 #endregion
 
-public class menuController : MonoBehaviour
-{
+public class menuController:MonoBehaviour {
     #region Internal variable declarations
     private GameObject backing;
     private float xpos;
@@ -27,11 +26,15 @@ public class menuController : MonoBehaviour
     private bool animToggle = true;
     private bool tabToggle = true;
     private string animState = "full";
+    private bool mustRunInit = true;
+
+    public Transform content;
+    public List<GameObject> items = new List<GameObject>();
     #endregion
 
     #region Configuration variable declarations
     public string title = "Menu window";
-    public string mode = "config";
+    public string mode = "none";
     public GameObject linkedobj;
     #endregion
 
@@ -72,6 +75,11 @@ public class menuController : MonoBehaviour
 
     // Update is called once per frame
     void Update() {
+        if (mustRunInit) {
+            Initalize();
+            mustRunInit = false;
+        }
+
         Movement();
         ActionAnimate();
         Visulization();
@@ -122,7 +130,7 @@ public class menuController : MonoBehaviour
                     case "close":
                         Destroy(gameObject);
                         break;
-                    }
+                }
             } else {
                 foreach (Transform child in backing.transform) {
                     switch (animState) {
@@ -206,12 +214,16 @@ public class menuController : MonoBehaviour
     }
 
     // Set up interactions
-    public void Initalize(object[] elements) {
-        foreach (object[] i in elements) {
-            switch (i[0]) {
-                case "test":
-                    break;
-            }
+    public void Initalize() {
+        switch (mode) {
+            case "config":
+                items.Add(Instantiate(Resources.Load("Prefabs/transformPanel"), new Vector3(), Quaternion.identity) as GameObject);
+                items[items.Count - 1].transform.SetParent(content, false);
+                items[items.Count - 1].transform.localPosition = new Vector3(0, -68, 0);
+                items[items.Count - 1].GetComponent<transformController>().target = linkedobj;
+
+                //content.GetComponent<RectTransform>().sizeDelta = new Vector2(68, 144.5f);
+                break;
         }
     }
 }

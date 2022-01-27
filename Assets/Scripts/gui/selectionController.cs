@@ -6,11 +6,13 @@ using UnityEngine;
 public class selectionController:MonoBehaviour {
     Camera cam;
     GameObject selected;
+    private Transform seltrans;
     bool lastclick = false;
     GameObject latestMenu;
     Renderer selrend;
 
     public LineRenderer line;
+    public Transform gizmoMove;
 
     // Start is called before the first frame update
     void Start() {
@@ -27,15 +29,16 @@ public class selectionController:MonoBehaviour {
             line.enabled = lastclick;
             if (lastclick) {
                 selected = hit.transform.gameObject;
+                seltrans = hit.transform;
                 selrend = selected.GetComponent<Renderer>();
             }
-            print(lastclick);
         } else if (Input.GetMouseButtonDown(1) && !EventSystem.current.IsPointerOverGameObject()) {
             if (lastclick) {
                 latestMenu = Instantiate(Resources.Load("Prefabs/menubox"), Input.mousePosition, Quaternion.identity) as GameObject;
                 menuController menu = latestMenu.GetComponent<menuController>();
                 menu.title = selected.name;
                 menu.linkedobj = selected;
+                menu.mode = "config";
             } else {
                 latestMenu = Instantiate(Resources.Load("Prefabs/menubox"), Input.mousePosition, Quaternion.identity) as GameObject;
                 menuController menu = latestMenu.GetComponent<menuController>();
@@ -45,7 +48,6 @@ public class selectionController:MonoBehaviour {
 
         if (lastclick) {
             Bounds box = selrend.bounds;
-            print(box.extents);
 
             #region selection box
             Vector3 point00 = new Vector3(-1, -1, -1);
@@ -129,6 +131,12 @@ public class selectionController:MonoBehaviour {
             line.SetPosition(18, point18);
             #endregion
 
+            Vector2 gizpos = cam.WorldToScreenPoint(seltrans.position);
+            gizmoMove.eulerAngles = new Vector3();
+            gizmoMove.position = cam.ScreenToWorldPoint(new Vector3(gizpos.x, gizpos.y, 0.3f));
+
+        } else {
+            gizmoMove.localPosition = new Vector3(0, 0, -1);
         }
     }
 }
