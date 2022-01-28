@@ -88,22 +88,26 @@ public class menuController:MonoBehaviour {
 
     // Control the tab and close buttons
     void controlButtons() {
-        if (animState != "close") {
-            if (backing.transform.GetChild(1).gameObject.GetComponent<betterButton>().PubIsPressed()) {
-                animState = "close";
-                targSize = new Vector2(0, 0);
-            } else if (backing.transform.GetChild(2).gameObject.GetComponent<betterButton>().PubIsPressed()) {
-                if ((animState == "full") & (tabToggle == true)) {
-                    animState = "tab";
-                    targSize = new Vector2(80, 14f);
-                } else {
-                    animState = "full";
-                    targSize = fullSize;
+        switch (mode) {
+            default:
+                if (animState != "close") {
+                    if (backing.transform.GetChild(1).gameObject.GetComponent<betterButton>().PubIsPressed()) {
+                        animState = "close";
+                        targSize = new Vector2(0, 0);
+                    } else if (backing.transform.GetChild(2).gameObject.GetComponent<betterButton>().PubIsPressed()) {
+                        if ((animState == "full") & (tabToggle == true)) {
+                            animState = "tab";
+                            targSize = new Vector2(80, 14f);
+                        } else {
+                            animState = "full";
+                            targSize = fullSize;
+                        }
+                        tabToggle = false;
+                    } else {
+                        tabToggle = true;
+                    }
                 }
-                tabToggle = false;
-            } else {
-                tabToggle = true;
-            }
+                break;
         }
     }
 
@@ -222,7 +226,8 @@ public class menuController:MonoBehaviour {
                 items[items.Count - 1].transform.localPosition = new Vector3(0, -68, 0);
                 items[items.Count - 1].GetComponent<transformController>().target = linkedobj;
 
-                //content.GetComponent<RectTransform>().sizeDelta = new Vector2(68, 144.5f);
+                content.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 144.5f);
+                content.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 68);
                 break;
         }
     }
