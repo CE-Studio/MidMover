@@ -81,14 +81,47 @@ public class menuController:MonoBehaviour {
         }
 
         Movement();
+        controlButtons();
         ActionAnimate();
         Visulization();
-        controlButtons();
     }
 
     // Control the tab and close buttons
     void controlButtons() {
         switch (mode) {
+            case "titlebar":
+                if (targx >= Camera.main.pixelRect.width) {
+                    targSize = new Vector2(27, 63);
+                    backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -19.5f, 0);
+                    backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -31.5f, 0);
+                    backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(7.5f, -43.5f, 0);
+                    backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(19.5f, -43.5f, 0);
+                    backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -55.5f, 0);
+                } else if (targx <= 0) {
+                    targSize = new Vector2(27, 63);
+                    backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -19.5f, 0);
+                    backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -31.5f, 0);
+                    backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(7.5f, -43.5f, 0);
+                    backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(19.5f, -43.5f, 0);
+                    backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -55.5f, 0);
+                } else if (targy >= Camera.main.pixelRect.height) {
+                    targSize = new Vector2(111, 15);
+                    backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(37.5f, -7.5f, 0);
+                    backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(61.5f, -7.5f, 0);
+                    backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(79.5f, -7.5f, 0);
+                    backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(91.5f, -7.5f, 0);
+                    backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(103.5f, -7.5f, 0);
+                } else if (targy <= 34) {
+                    targSize = new Vector2(111, 15);
+                    backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(37.5f, -7.5f, 0);
+                    backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(61.5f, -7.5f, 0);
+                    backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(79.5f, -7.5f, 0);
+                    backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(91.5f, -7.5f, 0);
+                    backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(103.5f, -7.5f, 0);
+                }
+                break;
+            case "playbar":
+                break;
             default:
                 if (animState != "close") {
                     if (backing.transform.GetChild(1).gameObject.GetComponent<betterButton>().PubIsPressed()) {
@@ -228,6 +261,9 @@ public class menuController:MonoBehaviour {
 
                 content.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 144.5f);
                 content.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 68);
+                break;
+            case "titlebar":
+                targSize = new Vector2(111, 15);
                 break;
         }
     }
