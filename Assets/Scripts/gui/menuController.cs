@@ -27,6 +27,7 @@ public class menuController:MonoBehaviour {
     private bool tabToggle = true;
     private string animState = "full";
     private bool mustRunInit = true;
+    private Camera maincam;
 
     public Transform content;
     public List<GameObject> items = new List<GameObject>();
@@ -55,19 +56,21 @@ public class menuController:MonoBehaviour {
         fullSize = new Vector2(backing.GetComponent<RectTransform>().rect.width,
                                backing.GetComponent<RectTransform>().rect.height);
         targSize = fullSize;
+
+        maincam = Camera.main;
         #endregion
 
         transform.SetParent(canvas.transform);
         transform.localScale = new Vector3(2, 1, 1);
         backing.transform.GetChild(0).gameObject.GetComponent<Text>().text = title;
 
-        if (targx > Camera.main.pixelRect.width) {
-            targx = Camera.main.pixelRect.width;
+        if (targx > maincam.pixelRect.width) {
+            targx = maincam.pixelRect.width;
         } else if (targx < 0) {
             targx = 0;
         }
-        if (targy > Camera.main.pixelRect.height) {
-            targy = Camera.main.pixelRect.height;
+        if (targy > maincam.pixelRect.height) {
+            targy = maincam.pixelRect.height;
         } else if (targy < 34) {
             targy = 34;
         }
@@ -89,58 +92,68 @@ public class menuController:MonoBehaviour {
     // Control the tab and close buttons
     void controlButtons() {
         switch (mode) {
-            case "titlebar":
-                if (targx >= Camera.main.pixelRect.width) {
-                    targSize = new Vector2(27, 63);
-                    backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -19.5f, 0);
-                    backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -31.5f, 0);
-                    backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(7.5f, -43.5f, 0);
-                    backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(19.5f, -43.5f, 0);
-                    backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -55.5f, 0);
-                } else if (targx <= 0) {
-                    targSize = new Vector2(27, 63);
-                    backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -19.5f, 0);
-                    backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -31.5f, 0);
-                    backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(7.5f, -43.5f, 0);
-                    backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(19.5f, -43.5f, 0);
-                    backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -55.5f, 0);
-                } else if (targy >= Camera.main.pixelRect.height) {
-                    targSize = new Vector2(111, 15);
-                    backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(37.5f, -7.5f, 0);
-                    backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(61.5f, -7.5f, 0);
-                    backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(79.5f, -7.5f, 0);
-                    backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(91.5f, -7.5f, 0);
-                    backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(103.5f, -7.5f, 0);
-                } else if (targy <= 34) {
-                    targSize = new Vector2(111, 15);
-                    backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(37.5f, -7.5f, 0);
-                    backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(61.5f, -7.5f, 0);
-                    backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(79.5f, -7.5f, 0);
-                    backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(91.5f, -7.5f, 0);
-                    backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(103.5f, -7.5f, 0);
-                }
-                break;
             case "playbar":
+            case "titlebar":
+                if (targx >= maincam.pixelRect.width) {
+                    reshapeVert();
+                } else if (targx <= 0) {
+                    reshapeVert();
+                } else if (targy >= maincam.pixelRect.height) {
+                    reshapeHoriz();
+                } else if (targy <= 34) {
+                    reshapeHoriz();
+                }
                 break;
             default:
-                if (animState != "close") {
-                    if (backing.transform.GetChild(1).gameObject.GetComponent<betterButton>().PubIsPressed()) {
-                        animState = "close";
-                        targSize = new Vector2(0, 0);
-                    } else if (backing.transform.GetChild(2).gameObject.GetComponent<betterButton>().PubIsPressed()) {
-                        if ((animState == "full") & (tabToggle == true)) {
-                            animState = "tab";
-                            targSize = new Vector2(80, 14f);
-                        } else {
-                            animState = "full";
-                            targSize = fullSize;
-                        }
-                        tabToggle = false;
+                if (animState == "close") break;
+                if (backing.transform.GetChild(1).gameObject.GetComponent<betterButton>().PubIsPressed()) {
+                    animState = "close";
+                    targSize = new Vector2(0, 0);
+                } else if (backing.transform.GetChild(2).gameObject.GetComponent<betterButton>().PubIsPressed()) {
+                    if ((animState == "full") & (tabToggle == true)) {
+                        animState = "tab";
+                        targSize = new Vector2(80, 14f);
                     } else {
-                        tabToggle = true;
+                        animState = "full";
+                        targSize = fullSize;
                     }
+                    tabToggle = false;
+                } else {
+                    tabToggle = true;
                 }
                 break;
+        }
+    }
+
+    private void reshapeVert() {
+        if (animState == "vert") return;
+        animState = "vert";
+
+        if (mode == "titlebar") {
+            targSize = new Vector2(27, 63);
+            backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -19.5f, 0);
+            backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -31.5f, 0);
+            backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(7.5f, -43.5f, 0);
+            backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(19.5f, -43.5f, 0);
+            backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -55.5f, 0);
+        } else {
+
+        }
+    }
+
+    private void reshapeHoriz() {
+        if (animState == "horiz") return;
+        animState = "horiz";
+
+        if (mode == "titlebar") {
+            targSize = new Vector2(111, 15);
+            backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(37.5f, -7.5f, 0);
+            backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(61.5f, -7.5f, 0);
+            backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(79.5f, -7.5f, 0);
+            backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(91.5f, -7.5f, 0);
+            backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(103.5f, -7.5f, 0);
+        } else {
+
         }
     }
 
@@ -150,6 +163,8 @@ public class menuController:MonoBehaviour {
             animToggle = animDone;
             if (animDone) {
                 switch (animState) {
+                    case "horiz":
+                    case "vert":
                     case "full":
                         foreach (Transform child in backing.transform) {
                             child.gameObject.SetActive(true);
@@ -171,6 +186,8 @@ public class menuController:MonoBehaviour {
             } else {
                 foreach (Transform child in backing.transform) {
                     switch (animState) {
+                        case "horiz":
+                        case "vert":
                         case "full":
                             child.gameObject.SetActive(false);
                             break;
@@ -237,13 +254,13 @@ public class menuController:MonoBehaviour {
         if (backing.GetComponent<betterButton>().PubIsPressed()) {
             targx -= xcurvel;
             targy -= ycurvel;
-            if (targx > Camera.main.pixelRect.width) {
-                targx = Camera.main.pixelRect.width;
+            if (targx > maincam.pixelRect.width) {
+                targx = maincam.pixelRect.width;
             } else if (targx < 0) {
                 targx = 0;
             }
-            if (targy > Camera.main.pixelRect.height) {
-                targy = Camera.main.pixelRect.height;
+            if (targy > maincam.pixelRect.height) {
+                targy = maincam.pixelRect.height;
             } else if (targy < 34) {
                 targy = 34;
             }
