@@ -71,8 +71,8 @@ public class menuController:MonoBehaviour {
         }
         if (targy > maincam.pixelRect.height) {
             targy = maincam.pixelRect.height;
-        } else if (targy < 34) {
-            targy = 34;
+        } else if (targy < 45) {
+            targy = 45;
         }
     }
 
@@ -100,7 +100,7 @@ public class menuController:MonoBehaviour {
                     reshapeVert();
                 } else if (targy >= maincam.pixelRect.height) {
                     reshapeHoriz();
-                } else if (targy <= 34) {
+                } else if (targy <= 45) {
                     reshapeHoriz();
                 }
                 break;
@@ -112,7 +112,7 @@ public class menuController:MonoBehaviour {
                 } else if (backing.transform.GetChild(2).gameObject.GetComponent<betterButton>().PubIsPressed()) {
                     if ((animState == "full") & (tabToggle == true)) {
                         animState = "tab";
-                        targSize = new Vector2(80, 14f);
+                        targSize = new Vector2(80, 15f);
                     } else {
                         animState = "full";
                         targSize = fullSize;
@@ -137,7 +137,7 @@ public class menuController:MonoBehaviour {
             backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(19.5f, -43.5f, 0);
             backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -55.5f, 0);
         } else {
-
+            targSize = new Vector2(42, 141);
         }
     }
 
@@ -153,7 +153,7 @@ public class menuController:MonoBehaviour {
             backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(91.5f, -7.5f, 0);
             backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(103.5f, -7.5f, 0);
         } else {
-
+            targSize = new Vector2(141, 42);
         }
     }
 
@@ -261,8 +261,8 @@ public class menuController:MonoBehaviour {
             }
             if (targy > maincam.pixelRect.height) {
                 targy = maincam.pixelRect.height;
-            } else if (targy < 34) {
-                targy = 34;
+            } else if (targy < 45) {
+                targy = 45;
             }
         }
     }
