@@ -521,7 +521,7 @@ GameObject:
   - component: {fileID: 1388079900941644938}
   - component: {fileID: 1388079900941644939}
   m_Layer: 5
-  m_Name: Scroll View
+  m_Name: timeline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -605,7 +605,7 @@ MonoBehaviour:
   m_Elasticity: 0.1
   m_Inertia: 1
   m_DecelerationRate: 0.135
-  m_ScrollSensitivity: 1
+  m_ScrollSensitivity: 5
   m_Viewport: {fileID: 1388079899940640715}
   m_HorizontalScrollbar: {fileID: 1388079900264105597}
   m_VerticalScrollbar: {fileID: 0}
@@ -779,7 +779,7 @@ GameObject:
   - component: {fileID: 4621373137376924279}
   - component: {fileID: 4621373137376924272}
   m_Layer: 5
-  m_Name: edit
+  m_Name: prevmid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -899,7 +899,7 @@ GameObject:
   - component: {fileID: 4621373137714066298}
   - component: {fileID: 4621373137714066299}
   m_Layer: 5
-  m_Name: midi
+  m_Name: prevkey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1019,7 +1019,7 @@ GameObject:
   - component: {fileID: 4621373138129803169}
   - component: {fileID: 4621373138129803170}
   m_Layer: 5
-  m_Name: rot
+  m_Name: nextkey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1139,7 +1139,7 @@ GameObject:
   - component: {fileID: 4621373138283270637}
   - component: {fileID: 4621373138283270638}
   m_Layer: 5
-  m_Name: sca
+  m_Name: nextmid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1259,7 +1259,7 @@ GameObject:
   - component: {fileID: 4621373138604077543}
   - component: {fileID: 4621373138604077536}
   m_Layer: 5
-  m_Name: pos
+  m_Name: play
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1379,7 +1379,7 @@ GameObject:
   - component: {fileID: 9085320599607393548}
   - component: {fileID: 9085320599607393547}
   m_Layer: 5
-  m_Name: file
+  m_Name: stop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

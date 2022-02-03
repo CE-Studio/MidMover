@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.EventSystems;
 using UnityEngine;
 
 public class cameraMovement : MonoBehaviour
@@ -33,7 +34,9 @@ public class cameraMovement : MonoBehaviour
                 transform.Rotate(mousemovey, 0, 0);
             }
         }
-        transform.position += transform.forward * (Input.mouseScrollDelta.y * 0.1f);
+        if (!EventSystem.current.IsPointerOverGameObject()) {
+            transform.position += transform.forward * (Input.mouseScrollDelta.y * 0.1f);
+        }
         if (Input.GetKey("w")) {
             transform.position += transform.forward * (Time.deltaTime * 4f);
         }

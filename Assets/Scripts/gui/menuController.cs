@@ -138,6 +138,13 @@ public class menuController:MonoBehaviour {
             backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(13.5f, -55.5f, 0);
         } else {
             targSize = new Vector2(42, 141);
+            backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(13f, -36f, 0);
+            backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(13f, -59f, 0);
+            backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(13f, -82f, 0);
+            backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(13f, -105f, 0);
+            backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(13f, -128f, 0);
+            backing.transform.GetChild(7).GetComponent<RectTransform>().anchoredPosition = new Vector3(11.5f, 0f, 0);
+            backing.transform.GetChild(7).GetComponent<RectTransform>().localEulerAngles = new Vector3(0f, 0f, -90f);
         }
     }
 
@@ -154,6 +161,13 @@ public class menuController:MonoBehaviour {
             backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(103.5f, -7.5f, 0);
         } else {
             targSize = new Vector2(141, 42);
+            backing.transform.GetChild(2).GetComponent<RectTransform>().anchoredPosition = new Vector3(36f, -13f, 0);
+            backing.transform.GetChild(3).GetComponent<RectTransform>().anchoredPosition = new Vector3(59f, -13f, 0);
+            backing.transform.GetChild(4).GetComponent<RectTransform>().anchoredPosition = new Vector3(82f, -13f, 0);
+            backing.transform.GetChild(5).GetComponent<RectTransform>().anchoredPosition = new Vector3(105f, -13f, 0);
+            backing.transform.GetChild(6).GetComponent<RectTransform>().anchoredPosition = new Vector3(128f, -13f, 0);
+            backing.transform.GetChild(7).GetComponent<RectTransform>().anchoredPosition = new Vector3(0f, -11.5f, 0);
+            backing.transform.GetChild(7).GetComponent<RectTransform>().localEulerAngles = new Vector3(0f, 0f, 0f);
         }
     }
 
