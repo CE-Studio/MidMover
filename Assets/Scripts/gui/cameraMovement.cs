@@ -10,6 +10,9 @@ public class cameraMovement : MonoBehaviour
     private float mousemovex;
     private float mousemovey;
 
+    public float mousePanScale = 1;
+    public float mouseTranslateScale = 1;
+
     // Start is called before the first frame update
     void Start(){
         lastmousex = Input.mousePosition.x;
@@ -27,11 +30,11 @@ public class cameraMovement : MonoBehaviour
 
         if (Input.GetMouseButton(2)) {
             if (Input.GetKey("left shift")) {
-                transform.position += transform.up * (mousemovey / 16);
-                transform.position += transform.right * (mousemovex / -16);
+                transform.position += transform.up * ((mousemovey * mouseTranslateScale) / 16);
+                transform.position += transform.right * ((mousemovex * mouseTranslateScale) / -16);
             } else {
-                transform.Rotate(0, mousemovex, 0, Space.World);
-                transform.Rotate(mousemovey, 0, 0);
+                transform.Rotate(0, (mousemovex * mousePanScale), 0, Space.World);
+                transform.Rotate((mousemovey * mousePanScale), 0, 0);
             }
         }
         if (!EventSystem.current.IsPointerOverGameObject()) {
