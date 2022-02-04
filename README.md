@@ -1,3 +1,3 @@
-# MidMover
+![](https://raw.githubusercontent.com/CE-Studio/MidMover/master/Assets/Sprites/mmbanner.png)
 
-wip
+# MidMover is still in early development! Check back later.
