@@ -37,9 +37,11 @@ public class cameraMovement : MonoBehaviour
                 transform.Rotate((mousemovey * mousePanScale), 0, 0);
             }
         }
-        if (!EventSystem.current.IsPointerOverGameObject()) {
-            transform.position += transform.forward * (Input.mouseScrollDelta.y * 0.1f);
-        }
+        
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+        
+        transform.position += transform.forward * (Input.mouseScrollDelta.y * 0.1f);
+        
         if (Input.GetKey("w")) {
             transform.position += transform.forward * (Time.deltaTime * 4f);
         }

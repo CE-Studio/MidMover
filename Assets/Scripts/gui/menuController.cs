@@ -1,6 +1,7 @@
 ﻿#region Imports
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 #endregion
@@ -28,6 +29,7 @@ public class menuController:MonoBehaviour {
     private string animState = "full";
     private bool mustRunInit = true;
     private Camera maincam;
+    private FileInfo dirInfo;
 
     public Transform content;
     public List<GameObject> items = new List<GameObject>();
@@ -37,6 +39,7 @@ public class menuController:MonoBehaviour {
     public string title = "Menu window";
     public string mode = "none";
     public GameObject linkedobj;
+    public string dir = "./";
     #endregion
 
     // Start is called before the first frame update
