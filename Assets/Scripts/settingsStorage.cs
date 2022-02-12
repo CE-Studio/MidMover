@@ -33,7 +33,7 @@ public class settingsStorage:MonoBehaviour {
     }
 
     void OnApplicationQuit() {
-        string savedata = JsonUtility.ToJson(globalSettings);
+        string savedata = JsonUtility.ToJson(globalSettings, true);
         File.WriteAllText("Settings.json", savedata);
     }
 }
