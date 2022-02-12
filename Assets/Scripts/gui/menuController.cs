@@ -1,7 +1,6 @@
 ﻿#region Imports
 using System.Collections;
 using System.Collections.Generic;
-using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 #endregion
@@ -9,6 +8,7 @@ using UnityEngine.UI;
 public class menuController:MonoBehaviour {
     #region Internal variable declarations
     private GameObject backing;
+    private GameObject canvas;
     private float xpos;
     private float ypos;
     private float xvel;
@@ -17,35 +17,32 @@ public class menuController:MonoBehaviour {
     private float ycurpos;
     private float xcurvel;
     private float ycurvel;
-    private float targx;
-    private float targy;
-    private GameObject canvas;
-    private Vector2 currentSize;
-    private Vector2 targSize;
-    private Vector2 fullSize;
     private bool animDone = false;
     private bool animToggle = true;
     private bool tabToggle = true;
     private string animState = "full";
     private bool mustRunInit = true;
     private Camera maincam;
-    private FileInfo dirInfo;
-
-    public Transform content;
-    public List<GameObject> items = new List<GameObject>();
     #endregion
 
     #region Configuration variable declarations
+    public float targx;
+    public float targy;
+    public Vector2 currentSize;
+    public Vector2 targSize;
+    public Vector2 fullSize;
+
+    public Transform content;
+    public List<GameObject> items = new List<GameObject>();
     public string title = "Menu window";
     public string mode = "none";
     public GameObject linkedobj;
     public string dir = "./";
     #endregion
 
-    // Start is called before the first frame update
     void Start() {
         #region Set variables
-        backing = this.gameObject.transform.GetChild(0).gameObject;
+        backing = transform.GetChild(0).gameObject;
         xpos = transform.position.x;
         ypos = transform.position.y;
         targx = transform.position.x;

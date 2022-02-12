@@ -14,16 +14,23 @@ public class settingsStorage:MonoBehaviour {
         public bool titlebarShape;
         public float camPanScale;
         public float camTransScale;
+        public string lastPath;
     }
 
     public static settingsGlobal globalSettings;
+
+    public menuController titlebar;
+    public menuController playbar;
 
     void Awake() {
         if (File.Exists("Settings.json")) {
             string savedata = File.ReadAllText("Settings.json");
             globalSettings = JsonUtility.FromJson<settingsGlobal>(savedata);
-        } else {
 
+            playbar.transform.position = globalSettings.playbarPos;
+            titlebar.transform.position = globalSettings.titlebarPos;
+        } else {
+            globalSettings.lastPath = "./";
         }
     }
 
@@ -33,6 +40,11 @@ public class settingsStorage:MonoBehaviour {
     }
 
     void OnApplicationQuit() {
+
+        globalSettings.playbarPos = new Vector2(playbar.targx, playbar.targy);
+
+        globalSettings.titlebarPos = new Vector2(titlebar.targx, titlebar.targy);
+
         string savedata = JsonUtility.ToJson(globalSettings, true);
         File.WriteAllText("Settings.json", savedata);
     }

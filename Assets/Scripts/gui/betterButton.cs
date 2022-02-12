@@ -11,13 +11,12 @@ public class betterButton:Button {
     public bool justPressed {
         get {
             bool i = IsPressed();
-            if (i == edgeTracker) return (false);
-            if (!i) {
-                edgeTracker = false;
+            if (i == edgeTracker) {
                 return (false);
+            } else {
+                edgeTracker = i;
+                return (i);
             }
-            edgeTracker = true;
-            return (true);
         }
     }
 }

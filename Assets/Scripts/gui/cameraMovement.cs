@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine.EventSystems;
 using UnityEngine;
 
-public class cameraMovement : MonoBehaviour
-{
+public class cameraMovement:MonoBehaviour {
     private float lastmousex;
     private float lastmousey;
     private float mousemovex;
@@ -14,7 +13,7 @@ public class cameraMovement : MonoBehaviour
     public float mouseTranslateScale = 1;
 
     // Start is called before the first frame update
-    void Start(){
+    void Start() {
         lastmousex = Input.mousePosition.x;
         lastmousey = Input.mousePosition.y;
     }
@@ -37,11 +36,11 @@ public class cameraMovement : MonoBehaviour
                 transform.Rotate((mousemovey * mousePanScale), 0, 0);
             }
         }
-        
+
         if (EventSystem.current.IsPointerOverGameObject()) return;
-        
+
         transform.position += transform.forward * (Input.mouseScrollDelta.y * 0.1f);
-        
+
         if (Input.GetKey("w")) {
             transform.position += transform.forward * (Time.deltaTime * 4f);
         }
