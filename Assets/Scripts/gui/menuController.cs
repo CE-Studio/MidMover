@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class menuController:MonoBehaviour {
     #region Internal variable declarations
+    private static UnityEngine.Object transformPanel;
+
     private GameObject backing;
     private GameObject canvas;
     private float xpos;
@@ -39,6 +41,10 @@ public class menuController:MonoBehaviour {
     public GameObject linkedobj;
     public string dir = "./";
     #endregion
+
+    private void Awake() {
+        transformPanel = Resources.Load("Prefabs/transformPanel");
+    }
 
     void Start() {
         #region Set variables
@@ -285,7 +291,7 @@ public class menuController:MonoBehaviour {
     public void Initalize() {
         switch (mode) {
             case "config":
-                items.Add(Instantiate(Resources.Load("Prefabs/transformPanel"), new Vector3(), Quaternion.identity) as GameObject);
+                items.Add(Instantiate(transformPanel, new Vector3(), Quaternion.identity) as GameObject);
                 items[items.Count - 1].transform.SetParent(content, false);
                 items[items.Count - 1].transform.localPosition = new Vector3(0, -68, 0);
                 items[items.Count - 1].GetComponent<transformController>().target = linkedobj;
