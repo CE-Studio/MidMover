@@ -7,7 +7,9 @@ using UnityEngine.UI;
 
 public class menuController:MonoBehaviour {
     #region Internal variable declarations
+    private static bool mustLoadPrefabs = true;
     private static UnityEngine.Object transformPanel;
+    private static UnityEngine.Object filebox;
 
     private GameObject backing;
     private GameObject canvas;
@@ -43,7 +45,11 @@ public class menuController:MonoBehaviour {
     #endregion
 
     private void Awake() {
-        transformPanel = Resources.Load("Prefabs/transformPanel");
+        if (mustLoadPrefabs) {
+            transformPanel = Resources.Load("Prefabs/transformPanel");
+            filebox = Resources.Load("Prefabs/filebox");
+            mustLoadPrefabs = false;
+        }
     }
 
     void Start() {

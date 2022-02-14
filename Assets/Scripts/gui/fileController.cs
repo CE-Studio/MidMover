@@ -15,6 +15,7 @@ public class fileController:MonoBehaviour {
                                                   "%userprofile%/Music",
                                                   "%userprofile%/Videos"};
 
+    private static bool mustLoadPrefabs = true;
     private static UnityEngine.Object listitem;
 
     private bool focustrack = false;
@@ -26,9 +27,13 @@ public class fileController:MonoBehaviour {
     public Transform contentContainer;
     public List<fileContentController> content;
     public string path;
+    public string filetype = "midi";
 
     void Awake() {
-        listitem = Resources.Load("Prefabs/fileContent");
+        if (mustLoadPrefabs) {
+            listitem = Resources.Load("Prefabs/fileContent");
+            mustLoadPrefabs = false;
+        }
     }
 
     // Start is called before the first frame update
@@ -61,22 +66,49 @@ public class fileController:MonoBehaviour {
             }
             populateContent(names.ToArray());
         }
+
+        foreach (fileContentController i in content) {
+            if (i.button.justPressed) {
+                if (i.isfolder) {
+                    cd(i.path);
+                } else {
+                    fileBox.text = i.filename;
+                }
+            }
+        }
+
+        if (openButton.justPressed) {
+
+        }
     }
 
     private void cd(string toGo) {
         string tp = Path.GetFullPath(System.Environment.ExpandEnvironmentVariables(toGo));
-        if (!Directory.Exists(tp)) { 
+        if (!Directory.Exists(tp)) {
             print("Invalid path " + tp);
             pathBox.text = path;
-            return; 
+            return;
         }
+
+        string[] dirs;
+        string[] files;
+
+        try {
+            dirs = Directory.GetDirectories(tp);
+            files = Directory.GetFiles(tp);
+        } catch {
+            print("No access to " + tp);
+            pathBox.text = path;
+            return;
+        }
+
+        string[] h = { tp + "/.." };
+
+        populateContent(h.Concat(dirs.Concat(files).ToArray()).ToArray());
         path = tp;
         pathBox.text = tp;
         settingsStorage.globalSettings.lastPath = tp;
 
-        string[] dirs = Directory.GetDirectories(tp);
-        string[] files = Directory.GetFiles(tp);
-        populateContent(dirs.Concat(files).ToArray());
     }
 
     private void populateContent(string[] items) {
