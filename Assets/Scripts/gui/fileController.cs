@@ -78,7 +78,9 @@ public class fileController:MonoBehaviour {
         }
 
         if (openButton.justPressed) {
-
+            if (filetype == "midi") {
+                globalMidiController.loadFile(path + fileBox.text);
+            }
         }
     }
 

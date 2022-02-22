@@ -4,11 +4,14 @@ using System.IO;
 using UnityEngine;
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi;
+using Melanchall.DryWetMidi.Interaction;
 
 public class globalMidiController:MonoBehaviour {
 
     public static string midiPath;
     public static MidiFile midi;
+    public static NotesManager manager;
+    public static NotesCollection notes;
 
     public static bool loadFile(string path) { 
         if (File.Exists(path)) {

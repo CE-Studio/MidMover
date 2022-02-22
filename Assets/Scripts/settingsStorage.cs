@@ -45,6 +45,10 @@ public class settingsStorage:MonoBehaviour {
 
         globalSettings.titlebarPos = new Vector2(titlebar.targx, titlebar.targy);
 
+        if (globalSettings.lastPath == "") {
+            globalSettings.lastPath = "./";
+        }
+
         string savedata = JsonUtility.ToJson(globalSettings, true);
         File.WriteAllText("Settings.json", savedata);
     }
